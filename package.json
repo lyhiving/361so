@@ -1,0 +1,16 @@
+{
+    "name": "361so",
+    "version": "0.0.1",
+    "private": true,
+    "scripts": {
+        "start": "node 361so"
+    },
+    "dependencies": {
+        "express": "4.8.1",
+        "errorhandler": "1.1.1",
+        "morgan": "1.2.2",
+        "cheerio":"0.13.1",
+        "iconv-lite":"0.2.11",
+        "request":"2.34.0"
+    }
+}

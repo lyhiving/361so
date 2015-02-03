@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html ng-app="tsq">
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="五线谱下载，音乐免费下载， 台湾节目下载，电影现在，361网站"/><meta name="description" content="五线谱，音乐，电影下载，港台综艺、政论节目下载"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>361资源下载</title>
+    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+    <link rel="stylesheet" href="/stylesheets/me.css">
+    <!--页面加载进度条样式-->
+    <link rel="stylesheet" href="/stylesheets/themes/pace-theme-bounce.css">
+    <style>
+    </style>
+</head>
+<body class="t-body" ng-controller="TypeaheadCtrl">
+
+<script type="text/ng-template" id="customTemplate.html">
+    <a>
+        <img ng-src="{{match.model.img}}" width="16">
+        <span bind-html-unsafe="match.label | typeaheadHighlight:query"></span>
+    </a>
+</script>
+<div>
+    <div class="w-container">
+        <div class="w-row">
+            <div class="w-col w-col-4"></div>
+            <div class="w-col w-col-4"><img class="t-img t-img-middle t-img-phone"
+                                            src="images/search.png"
+                                            alt=""></div>
+            <div class="w-col w-col-4"></div>
+        </div>
+    </div>
+</div>
+<div>
+    <div class="w-container t-caption-container"><a ng-click="set(1)" ng-class="activePdf" class="t-caption-link t-caption-link-phone" href="">乐谱</a><a
+            class="t-caption-link t-caption-link-phone" ng-class="activeMp3" href="" ng-click="set(2)">音乐&nbsp;</a><a
+            class="t-caption-link  t-caption-link-phone" ng-class="activeZh" ng-class="activeZh" href="" ng-click="set(3)">综合</a><a
+            class="t-caption-link t-caption-link-phone" href="" ng-class="activeTw" ng-click="set(4)">港台</a>
+        <a class="t-caption-link t-caption-link-phone" ng-class="activeFilm"  href="" ng-click="set(5)">电影</a></div>
+</div>
+
+<div class="animate-switch-container" ng-switch on="selection">
+    <div class="animate-switch" ng-switch-when="pdf">
+        <div>
+            <div class="w-container">
+                <div class="w-row">
+                    <div class="w-col w-col-2"></div>
+                    <div class="w-col w-col-8">
+                        <div class="w-row"><form name="email-form" data-name="Email Form">
+                            <div class="w-col w-col-10">
+                                <div class="w-form">
+                                    <input x-webkit-speech typeahead="title for title in getLocationPdf($viewValue) | filter:$viewValue"
+                                           class="w-input t-input" type="text" ng-model='qs.qsPdf' name="name" data-name="Name"></input>
+                                </div>
+                            </div>
+                            <div class="w-col w-col-2">
+                                <button class="button t-search-btn t-search-pad t-search-middle t-search-phone" ng-click='submit("pdf")' href="#">搜索乐谱</button>
+                            </div>
+                        </form>
+                        </div>
+                    </div>
+                    <div class="w-col w-col-2"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="animate-switch" ng-switch-when="mp3">
+        <div>
+            <div class="w-container">
+                <div class="w-row">
+                    <div class="w-col w-col-2"></div>
+                    <div class="w-col w-col-8">
+                        <div class="w-row"><form name="email-form" data-name="Email Form">
+                            <div class="w-col w-col-10">
+                                <div class="w-form">
+                                    <input  x-webkit-speech typeahead="mp3 as mp3.name for mp3 in getLocationMp3($viewValue)" typeahead-template-url="customTemplate.html"
+                                            class="w-input t-input" type="text" ng-model='qs.qsMp3' name="name" data-name="Name"></input>
+                                </div>
+                            </div>
+                            <div class="w-col w-col-2">
+                                <button class="button t-search-btn t-search-pad t-search-middle t-search-phone" ng-click='submit("mp3")' href="#">搜索MP3</button>
+                            </div>
+                        </form>
+                        </div>
+                    </div>
+                    <div class="w-col w-col-2"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="animate-switch" ng-switch-when="zh">
+        <div>
+            <div class="w-container">
+                <div class="w-row">
+                    <div class="w-col w-col-2"></div>
+                    <div class="w-col w-col-8">
+                        <div class="w-row"><form name="email-form" data-name="Email Form">
+                            <div class="w-col w-col-10">
+                                <div class="w-form">
+                                    <input typeahead="title for title in getLocationZh($viewValue) | filter:$viewValue"
+                                           x-webkit-speech class="w-input t-input" type="text" ng-model='qs.qsZh' name="name" data-name="Name"></input>
+                                </div>
+                            </div>
+                            <div class="w-col w-col-2">
+                                <button class="button t-search-btn t-search-pad t-search-middle t-search-phone" ng-click='submit("zh")' href="#">综合搜索</button>
+                            </div>
+                        </form>
+                        </div>
+                    </div>
+                    <div class="w-col w-col-2"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="animate-switch" ng-switch-when="tw">
+        <div>
+            <div class="w-container">
+                <div class="w-row">
+                    <div class="w-col w-col-2"></div>
+                    <div class="w-col w-col-8">
+                        <div class="w-row"><form name="email-form" data-name="Email Form">
+                            <div class="w-col w-col-10">
+                                <div class="w-form">
+                                    <input x-webkit-speech readonly  class="w-input t-input" type="text" value="正在为您自动搜索港台节目，请稍等片刻！" name="name" data-name="Name"></input>
+                                </div>
+                            </div>
+                            <div class="w-col w-col-2">
+                                <button disabled class="button t-search-btn t-search-pad t-search-middle t-search-phone" ng-click='submit("tw")' href="#">搜索港台</button>
+                            </div>
+                        </form>
+                        </div>
+                    </div>
+                    <div class="w-col w-col-2"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="animate-switch" ng-switch-when="film">
+        <div>
+            <div class="w-container">
+                <div class="w-row">
+                    <div class="w-col w-col-2"></div>
+                    <div class="w-col w-col-8">
+                        <div class="w-row"><form name="email-form" data-name="Email Form">
+                            <div class="w-col w-col-10">
+                                <div class="w-form">
+                                    <input x-webkit-speech  typeahead="title for title in getLocationFilm($viewValue) | filter:$viewValue"
+                                           class="w-input t-input" type="text" ng-model='qs.qsFilm' name="name" data-name="Name"></input>
+                                </div>
+                            </div>
+                            <div class="w-col w-col-2">
+                                <button class="button t-search-btn t-search-pad t-search-middle t-search-phone" ng-click='submit("film")' href="#">搜索电影</button>
+                            </div>
+                        </form>
+                        </div>
+                    </div>
+                    <div class="w-col w-col-2"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+<div ng-show="none">
+    <div class="w-container">
+        <div class="w-row">
+            <div class="w-col w-col-4"></div>
+            <div class="w-col w-col-4" ><h4 class="alert alert-success" style="text-align: center"><span ng-bind="noResult"></span></h4></div>
+            <div class="w-col w-col-4"></div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* 设置滚动条的样式 */
+    ::-webkit-scrollbar {
+        width: 10px;
+    }
+    /* 滚动槽 */
+    ::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        border-radius: 10px;
+    }
+    /* 滚动条滑块 */
+    ::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        background: #4bbe11;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+    }
+    ::-webkit-scrollbar-thumb:window-inactive {
+        background: #4bbe11;
+    }
+</style>
+<div>
+    <div class="w-container">
+        <div class="w-row">
+            <div class="w-col w-col-2"></div>
+            <div class="w-col w-col-8" style="text-align: center; height: 300px; overflow: auto">
+                <div ng-repeat="item in items" style="padding: 4px 2px;">
+                    <a style="cursor: pointer; color: #4bbe11" ng-click="down(item.href)"><span ng-bind="item.title"></span></a>
+                </div>
+            </div>
+            <div class="w-col w-col-2"></div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!--START:页面加载进度条-->
+<script src="/javascripts/th/pace.js"></script>
+<!--END:页面加载进度条-->
+
+<script src="/javascripts/jq/core/jquery-1.11.js"></script>
+
+
+<!--START:js for angular-->
+<script src="/javascripts/ng/core/angular-1.2.13.js"></script>
+<script src="/javascripts/ng/core/angular-resource.js"></script>
+<script src="/javascripts/ng/core/ui-bootstrap-tpls-0.10.0.js"></script>
+<script src="/javascripts/th/bootstrap.js"></script>
+<script src="/javascripts/ng/app.js"></script>
+
+<script src="/javascripts/ng/services/services.js"></script>
+<script src="/javascripts/ng/services/posts.js"></script>
+<!--<script src="/javascripts/ng/directives/"></script>-->
+<!--<script src="/javascripts/ng/routes/"></script>-->
+
+
+<script src="/javascripts/ng/controllers/typeaHead.js"></script>
+
+<!--END:js for angular-->
+<script type="text/javascript">
+    var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fb0835d5e47a5960279d68390c2386f87' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+</body>
+</html>
